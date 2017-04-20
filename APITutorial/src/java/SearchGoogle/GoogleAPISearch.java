@@ -34,16 +34,29 @@ public class GoogleAPISearch {
 //            JSONArray jsonarray = json.getJSONArray("items");
 //            if (jsonarray != null && jsonarray.length() > 0) {
 //                snippet = jsonarray.getJSONObject(0).getString("snippet");
-            }catch (Exception e) {
+//            }
+        }catch (Exception e) {
             System.out.println(e.getMessage());
         }
             return strResponse;
         }
     
-    
-
+    public String searchWeatherAPI(){
+        String API_key = "7ad5f53ef8c181faf755dfb347058f8d";
+        String strResponse = "";
+        RestConnection conn = new RestConnection("http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=" + API_key);
+        try {
+            RestResponse response = conn.get();
+            strResponse = response.getDataAsString();
+        
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+            return strResponse;
+        }
     public static void main(String[] args) {
         GoogleAPISearch g = new GoogleAPISearch();
         System.out.println(g.searchGoogleAPI("Monash University"));
+//        System.out.println(g.searchWeatherAPI());
     }
 }
